@@ -1,0 +1,12 @@
+.DS_Store
+
+# Neovim state/caches
+.netrwhist
+*.swp
+*.swo
+*.tmp
+
+# lazy.nvim / Mason artifacts
+lazy/
+mason/
+spell/
