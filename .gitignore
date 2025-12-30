@@ -1,5 +1,22 @@
 .DS_Store
 
+# state / history
+.zsh_history
+.python_history
+.viminfo
+.lesshst
+.zsh_sessions
+
+# caches / temp
+.cache/
+.local/
+.DS_Store
+
+# secrets
+.ssh/
+*.local
+*.env
+
 # Neovim state/caches
 .netrwhist
 *.swp

@@ -1,4 +1,4 @@
-# neovim config
+# dotfiles 
 
 symlink to proper location 
 
