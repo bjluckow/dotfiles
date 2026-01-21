@@ -18,5 +18,5 @@ alias nv="nvim"
 
 # Automatically list directory contents after cd
 function chpwd() {
-  ls
+  ls -pa
 }
