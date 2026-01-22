@@ -8,11 +8,13 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   { "mason-org/mason.nvim", lazy = false, opts = {} },
-  { "neovim/nvim-lspconfig",
+  { 
+    "neovim/nvim-lspconfig",
     config = function()
     vim.lsp.enable("pyright")
     end
   },
+
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -21,10 +23,24 @@ require("lazy").setup({
     vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
     end,
   },
+
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
+
+  {
+  "stevearc/conform.nvim",
+    config = function()
+    require("conform").setup({
+      formatters_by_ft = {
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+      },
+      format_on_save = true,
+      })
+    end,
+  }
 })
 
 
@@ -46,11 +62,45 @@ vim.api.nvim_create_autocmd("CursorHold", {
   end,
 })
 
+-- tree
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function(data)
+    local directory = vim.fn.isdirectory(data.file) == 1
+    if directory then
+      vim.cmd.cd(data.file)
+      require("nvim-tree.api").tree.open()
+    end
+  end
+})
+
 -- telescope
-require("telescope").setup({})
+require("telescope").setup({
+  defaults = {
+    file_ignore_patterns = {
+      "node_modules",
+      ".git/",
+      "dist",
+      "build",
+      ".next",
+      "target",
+    },
+  },
+})
 
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+
+-- conform
+vim.api.nvim_create_autocmd("InsertLeave", {
+  pattern = {"*.js", "*.ts", "*.tsx", "*.jsx"},
+  callback = function()
+    require("conform").format({ async = false })
+  end,
+})
+
+vim.keymap.set("n", "<leader>f", function()
+  require("conform").format()
+end, { desc = "Format buffer" })
