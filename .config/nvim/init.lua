@@ -91,13 +91,14 @@ require("lazy").setup({
           javascriptreact = { "prettier" },
           typescript = { "prettier" },
           typescriptreact   = { "prettier" },
+          go = { "goimports" },
         },
         format_on_save = true,
         })
 
 
       vim.api.nvim_create_autocmd("InsertLeave", {
-        pattern = {"*.js", "*.ts", "*.tsx", "*.jsx"},
+        pattern = {"*.js", "*.ts", "*.tsx", "*.jsx", "*.go"},
         callback = function()
           require("conform").format({ async = false })
         end,
