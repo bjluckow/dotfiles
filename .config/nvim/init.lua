@@ -162,6 +162,30 @@ require("lazy").setup({
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
   },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    lazy = false,
+    config = function()
+      require("nvim-treesitter.config").setup({
+        ensure_installed = {
+          "go",
+          "lua",
+          "python",
+          "javascript",
+          "typescript",
+        },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+        indent = {
+          enable = true,
+        },
+      })
+    end,
+  }
 })
 
 
@@ -184,5 +208,5 @@ vim.api.nvim_create_autocmd("CursorHold", {
   end,
 })
 
-local t = { foo = 1 }
-
+vim.cmd("syntax enable")
+vim.cmd("syntax on")
