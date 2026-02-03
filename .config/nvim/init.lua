@@ -7,8 +7,31 @@
 	vim.opt.rtp:prepend(lazypath)
 
 	require("lazy").setup({
-	  { "mason-org/mason.nvim", lazy = false, opts = {} },
-  
+	  { 
+      "mason-org/mason.nvim", 
+      lazy = false,
+      config = function()
+        require("mason").setup()
+      end
+    },
+
+
+    {
+      "williamboman/mason-lspconfig.nvim",
+      dependencies = { "mason-org/mason.nvim" },
+      config = function()
+        require("mason-lspconfig").setup({
+          ensure_installed = {
+            "gopls",
+            "pyright",
+            "ts_ls",
+            "lua_ls",
+          },
+          automatic_installation = true,
+        })
+      end,
+    },
+
   -- color scheme
   {
     "sainnhe/everforest", -- https://dotfyle.com/plugins/sainnhe/everforest
@@ -17,40 +40,52 @@
 
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "hrsh7th/cmp-nvim-lsp" },
+    dependencies = { 
+      "hrsh7th/cmp-nvim-lsp", 
+      "williamboman/mason-lspconfig.nvim" 
+    },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      
-      -- Python
-      vim.lsp.config("pyright", {
-        capabilities = capabilities,
-      })
 
-      -- TypeScript / TSX
-      vim.lsp.config("ts_ls", {
-        capabilities = capabilities,
-        settings = {
-          completions = {
-            completeFunctionCalls = true,
-          }
-        }
-      })
-  
-      -- Go
+      -- default behavior
+      local function setup(server)
+        vim.lsp.config(server, {
+          capabilities = capabilities
+        })
+      end
+
+      -- basic servers
+      setup("pyright")
+      setup("ts_ls")
+
+      -- Go overrides
       vim.lsp.config("gopls", {
         capabilities = capabilities,
         settings = {
           gopls = {
             completeUnimported = true,
             staticcheck = true,
-          },
-        },
+          }
+        }
       })
-
-      vim.lsp.enable("pyright")
-      vim.lsp.enable("ts_ls")
       vim.lsp.enable("gopls")
-    end,
+
+      -- Lua overrides
+      vim.lsp.config("lua_ls", {
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            diagnostics = { globals = { "vim" } },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true),
+              checkThirdParty = false,
+            },
+            telemetry = { enable = false },
+          }
+        }
+      })
+      vim.lsp.enable("lua_ls")
+    end
   },
 
   {
