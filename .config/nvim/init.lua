@@ -20,12 +20,22 @@
     dependencies = { "hrsh7th/cmp-nvim-lsp" },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
+      
       -- Python
       vim.lsp.config("pyright", {
         capabilities = capabilities,
       })
 
+      -- TypeScript / TSX
+      vim.lsp.config("ts_ls", {
+        capabilities = capabilities,
+        settings = {
+          completions = {
+            completeFunctionCalls = true,
+          }
+        }
+      })
+  
       -- Go
       vim.lsp.config("gopls", {
         capabilities = capabilities,
@@ -38,6 +48,7 @@
       })
 
       vim.lsp.enable("pyright")
+      vim.lsp.enable("ts_ls")
       vim.lsp.enable("gopls")
     end,
   },

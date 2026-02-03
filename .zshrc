@@ -13,6 +13,9 @@ setopt HIST_SAVE_NO_DUPS        # Do not write a duplicate event to the history 
 setopt HIST_FIND_NO_DUPS        # When searching history, do not display duplicates of a line previously found.
 setopt HIST_IGNORE_ALL_DUPS     # Delete an old recorded event if a new event is a duplicate.
 
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
 alias py="python3"
 alias nv="nvim"
 
