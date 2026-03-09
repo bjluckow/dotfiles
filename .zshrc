@@ -19,8 +19,10 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias py="python3"
 alias nv="nvim"
+alias gs="git status"
 
 # Automatically list directory contents after cd
 function chpwd() {
   ls -pa
 }
+export PATH="$PATH:${HOME}/bin"
