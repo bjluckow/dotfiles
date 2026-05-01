@@ -26,3 +26,8 @@ function chpwd() {
   ls -pa
 }
 export PATH="$PATH:${HOME}/bin"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/benjamin/.lmstudio/bin"
+# End of LM Studio CLI section
+

@@ -3,6 +3,8 @@ tap "sdkman/tap"
 tap "theboredteam/boring-notch"
 # Isolated development environments using Docker
 brew "docker-compose"
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # Quickly rewrite git repository history
@@ -25,6 +27,8 @@ brew "sqlite"
 brew "nmap"
 # Manage multiple Node.js versions
 brew "nvm"
+# Object-relational database system
+brew "postgresql@18", link: true
 # Python version management
 brew "pyenv"
 # Pyenv plugin to manage virtualenv
@@ -37,6 +41,8 @@ brew "stow"
 brew "tldr"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
 # Network analyzer and capture tool - without graphical user interface
 brew "wireshark"
 # Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
@@ -49,6 +55,8 @@ cask "arc"
 cask "chatgpt"
 # Anthropic's official Claude AI desktop app
 cask "claude"
+# Terminal-based AI coding assistant
+cask "claude-code"
 # Write, edit, and chat about your code with AI
 cask "cursor"
 # API documentation browser and code snippet manager
@@ -87,9 +95,23 @@ cask "warp"
 cask "wireshark-app"
 # Video communication and virtual meeting platform
 cask "zoom"
+vscode "dbaeumer.vscode-eslint"
 vscode "esbenp.prettier-vscode"
-vscode "github.copilot"
 vscode "github.copilot-chat"
+vscode "github.vscode-github-actions"
+vscode "golang.go"
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-python.debugpy"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-python.vscode-python-envs"
+vscode "ms-vscode-remote.remote-containers"
 vscode "sabrsorensen.synthwave-blues"
+go "github.com/bjluckow/gitignorer"
 go "golang.org/x/tools/cmd/goimports"
 go "golang.org/x/tools/gopls"
+go "github.com/bjluckow/harchiver/cmd/harlaunch"
+go "github.com/bjluckow/harchiver/cmd/harlisten"
+go "github.com/davecheney/httpstat"
+go "github.com/bjluckow/lorem"
+go "github.com/bjluckow/vgrep"
